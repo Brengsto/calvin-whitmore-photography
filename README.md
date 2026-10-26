@@ -1,10 +1,10 @@
-# Jonas Halberg Photography
+# Calvin Whitmore Photography
 
 One-page portfolio for a **fictional** black-and-white film photographer from Hamburg.
 The whole page is designed as a contact sheet: black film strips with sprocket holes and edge print,
 grease-pencil circles around the keepers, a loupe (lightbox) with exposure notes and a lab-order price slip.
 
-**Live:** https://brengsto.github.io/jonas-halberg-photography/
+**Live:** https://brengsto.github.io/calvin-whitmore-photography/
 
 ## Features
 
@@ -18,7 +18,7 @@ Plain HTML, CSS and JavaScript in a single `index.html`. No build step.
 
 ## Credits
 
-Jonas Halberg and all names, quotes and exhibitions are made up.
+Calvin Whitmore and all names, quotes and exhibitions are made up.
 Photos are stock images from [Unsplash](https://unsplash.com), served via [Lorem Picsum](https://picsum.photos),
 by Diogo Tavares, Alejandro Escamilla, Nicholas Swanson, Adam Przewoski, Christopher Sardegna, Alexander Shustov,
 davide ragusa, Yair Hazout, Tony Naccarato, Orlova Maria, Danka & Peter, Sylwia Bartyzel, John Maravelakis,
