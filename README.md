@@ -1,6 +1,6 @@
 # Calvin Whitmore Photography
 
-One-page portfolio for a **fictional** black-and-white film photographer from Hamburg.
+One-page portfolio for a **fictional** black-and-white film photographer from Portland, Maine.
 The whole page is designed as a contact sheet: black film strips with sprocket holes and edge print,
 grease-pencil circles around the keepers, a loupe (lightbox) with exposure notes and a lab-order price slip.
 
@@ -9,7 +9,7 @@ grease-pencil circles around the keepers, a loupe (lightbox) with exposure notes
 ## Features
 
 - Filterable contact sheet (City, People, Coast, Stillness)
-- Hover to reveal colour, loupe with keyboard navigation and a colour toggle
+- Hover to reveal color, loupe with keyboard navigation and a color toggle
 - Light theme (photo paper) and dark theme (darkroom), following the system setting
 - Responsive down to phone width
 - Contact form with validation (demo only, nothing is sent)
