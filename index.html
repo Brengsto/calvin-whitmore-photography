@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jonas Halberg Photography</title>
+<meta name="description" content="Jonas Halberg, analogue black-and-white photographer based in Hamburg. Portraits, reportage, editorial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Permanent+Marker&display=swap">
+<style>
+/* Layout: the whole page is a contact sheet. Paper as the ground, black film strips as bands,
+   the grease pencil marks what matters. Light = photo paper in daylight, dark = darkroom under the safelight. */
+:root {
+  --paper: #e7e8e3;
+  --card: #f4f4f0;
+  --ink: #161615;
+  --ink-soft: #565850;
+  --line: rgba(22, 22, 21, .16);
+  --film: #121211;
+  --edge: #cbbf9f;
+  --pencil: #c42f1d;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+  --mono: "DM Mono", ui-monospace, Consolas, monospace;
+  --hand: "Permanent Marker", "Segoe Print", "Comic Sans MS", cursive;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --max: 1240px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15100f; --card: #211a18; --ink: #ede4d9; --ink-soft: #a89b8f;
+    --line: rgba(237, 228, 217, .15); --film: #050404; --edge: #8a7a63; --pencil: #f1bf2f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #15100f; --card: #211a18; --ink: #ede4d9; --ink-soft: #a89b8f;
+  --line: rgba(237, 228, 217, .15); --film: #050404; --edge: #8a7a63; --pencil: #f1bf2f;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--paper);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--pencil); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap {
+  max-width: var(--max); margin-inline: auto;
+  padding-left: var(--gutter-l); padding-right: var(--gutter-r);
+}
+.mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+.hand { font-family: var(--hand); color: var(--pencil); font-weight: 400; line-height: 1.1; }
+
+/* ---------- Header ---------- */
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.bar .wrap { display: flex; align-items: center; gap: 24px; padding-block: 12px; }
+.logo {
+  font: 900 1.6rem/1 var(--display); text-decoration: none; letter-spacing: .02em;
+  display: inline-flex; align-items: baseline; gap: 2px;
+}
+.logo span { color: var(--pencil); }
+.bar nav { display: flex; gap: 22px; margin-left: auto; }
+.bar nav a { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding-block: 4px; border-bottom: 1px solid transparent; }
+.bar nav a:hover { border-bottom-color: var(--pencil); }
+.bar-cta {
+  display: none; margin-left: auto;
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+  text-decoration: none; padding: 7px 12px; border: 1px solid var(--ink); border-radius: 2px; white-space: nowrap;
+}
+.bar-cta:hover { background: var(--pencil); border-color: var(--pencil); color: var(--paper); }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(32px, 6vw, 72px) clamp(40px, 6vw, 80px); }
+.hero .eyebrow { color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.hero h1 {
+  font: 900 clamp(4.4rem, 17vw, 14.5rem)/.8 var(--display);
+  text-transform: uppercase; letter-spacing: -.005em;
+  margin-top: 18px;
+}
+.hero h1 .l2 { display: block; padding-left: .55em; }
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 4vw, 64px); align-items: end; margin-top: clamp(28px, 4vw, 48px);
+}
+.hero-text { display: grid; gap: 28px; min-width: 0; }
+.lead { font-size: clamp(1.25rem, 2.2vw, 1.6rem); line-height: 1.38; max-width: 30ch; }
+.lead em { font-style: italic; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  text-decoration: none; padding: 13px 18px; border: 1.5px solid var(--ink); border-radius: 2px;
+  background: transparent; color: var(--ink); cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn:hover { background: var(--pencil); border-color: var(--pencil); color: var(--paper); }
+
+.print { position: relative; min-width: 0; }
+.print .frame-film {
+  background: var(--film); padding: 22px 14px; position: relative;
+  transform: rotate(-1.2deg);
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .55);
+}
+.print img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: grayscale(1) contrast(1.08); }
+.print .edge {
+  position: absolute; left: 14px; right: 14px; bottom: 4px;
+  display: flex; justify-content: space-between;
+  font: 500 .62rem/1 var(--mono); letter-spacing: .14em; color: var(--edge);
+}
+.sprockets::before, .sprockets::after {
+  content: ""; position: absolute; left: 6px; right: 6px; height: 7px;
+  background: repeating-linear-gradient(90deg, transparent 0 7px, var(--paper) 7px 15px, transparent 15px 22px);
+  opacity: .9; border-radius: 1px;
+}
+.sprockets::before { top: 6px; }
+.sprockets::after { bottom: 6px; }
+.print .edge { bottom: 15px; }
+.print .note {
+  position: absolute; right: -6px; top: -54px; transform: rotate(4deg);
+  font-size: clamp(1.1rem, 2vw, 1.45rem); text-align: right;
+}
+.print .ring {
+  position: absolute; left: 61%; top: 28%; width: 27%; height: 62%; pointer-events: none; overflow: visible;
+}
+.ring, .cross, .strike {
+  fill: none; stroke: var(--pencil); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round;
+
+}
+.hero .ring { stroke-dasharray: 3000; stroke-dashoffset: 0; animation: draw 1.4s .5s cubic-bezier(.6, .1, .2, 1) backwards; }
+@keyframes draw { from { stroke-dashoffset: 3000; } }
+
+/* ---------- Film strip band ---------- */
+.strip {
+  background: var(--film); color: var(--edge); overflow: hidden; position: relative;
+  padding-block: 20px;
+}
+.strip .run {
+  display: flex; width: max-content; gap: 0;
+  font: 500 .74rem/1 var(--mono); letter-spacing: .22em; white-space: nowrap;
+  animation: run 48s linear infinite;
+}
+.strip .run span { padding-right: 3.2em; }
+.strip .run span b { color: var(--pencil); font-weight: 500; }
+@keyframes run { to { transform: translateX(-50%); } }
+
+/* ---------- Sections ---------- */
+section { padding-block: clamp(64px, 9vw, 128px); }
+.sec-head {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px 48px; align-items: end;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.sec-head .kicker { color: var(--pencil); margin-bottom: 14px; display: block; }
+.sec-head h2, .h2 {
+  font: 900 clamp(2.8rem, 7vw, 6rem)/.88 var(--display); text-transform: uppercase;
+}
+.sec-head p { color: var(--ink-soft); max-width: 46ch; }
+
+/* ---------- Contact sheet ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; align-items: center; }
+.filters .label { color: var(--ink-soft); margin-right: 6px; }
+.chip {
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: 8px 13px; border-radius: 999px; border: 1px solid var(--line);
+  background: transparent; color: var(--ink); cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.chip sup { font-size: .62rem; color: var(--ink-soft); margin-left: 3px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip[aria-pressed="true"] sup { color: inherit; opacity: .7; }
+
+.sheet {
+  background: var(--film); padding: clamp(10px, 1.6vw, 18px);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 0;
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, .6);
+}
+.fr {
+  position: relative; padding: 24px 9px 34px; background: none; border: 0; color: var(--edge);
+  cursor: zoom-in; text-align: left; font: inherit; min-width: 0;
+}
+.fr::before, .fr::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 7px;
+  background: repeating-linear-gradient(90deg, transparent 0 6px, var(--paper) 6px 14px, transparent 14px 20px);
+  opacity: .85;
+}
+.fr::before { top: 8px; }
+.fr::after { bottom: 8px; }
+.fr img {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover;
+  filter: grayscale(1) contrast(1.1) brightness(.98);
+  transition: filter .6s ease;
+}
+.fr:hover img, .fr:focus-visible img { filter: grayscale(0) contrast(1) brightness(1); }
+.fr .num {
+  position: absolute; left: 10px; right: 10px; bottom: 19px;
+  display: flex; justify-content: space-between; gap: 8px;
+  font: 500 .62rem/1 var(--mono); letter-spacing: .14em; font-variant-numeric: tabular-nums;
+}
+.fr .num i { font-style: normal; opacity: .7; }
+.fr .ring, .fr .cross { position: absolute; inset: 12px 0 22px; width: 100%; height: calc(100% - 34px); pointer-events: none; }
+.fr .tag {
+  position: absolute; z-index: 2; pointer-events: none;
+  font-size: clamp(.95rem, 1.6vw, 1.2rem); transform: rotate(-6deg);
+}
+.fr .tag.tr { right: 4px; top: -6px; }
+.fr .tag.bl { left: 10px; bottom: 30px; transform: rotate(-3deg); background: var(--film); padding: 0 6px; }
+.fr:focus-visible { outline-offset: -3px; }
+.fr[hidden] { display: none !important; }
+.sheet-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; margin-top: 16px; color: var(--ink-soft); }
+
+/* ---------- Manifest ---------- */
+.manifest { border-block: 1px solid var(--line); }
+.manifest ol { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(10px, 2vw, 22px); }
+.manifest li {
+  font: 900 clamp(2.3rem, 7.4vw, 6.4rem)/.92 var(--display); text-transform: uppercase;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .35em;
+}
+.manifest li:nth-child(even) { padding-left: clamp(0px, 8vw, 140px); }
+.manifest li .soft { color: var(--ink-soft); }
+.manifest .struck { position: relative; display: inline-block; color: var(--ink-soft); }
+.manifest .struck .strike { position: absolute; left: -4%; top: 30%; width: 108%; height: 40%; }
+.manifest .struck + .hand { font-size: clamp(1.6rem, 4.4vw, 3.6rem); text-transform: none; transform: rotate(-5deg); display: inline-block; }
+
+/* ---------- About ---------- */
+.about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.polaroid {
+  background: var(--card); padding: 14px 14px 78px; transform: rotate(2deg); position: relative;
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .5); max-width: 460px;
+}
+.polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; filter: grayscale(1) contrast(1.1); }
+.polaroid figcaption { position: absolute; left: 18px; right: 18px; bottom: 14px; font-size: 1.2rem; }
+.tape {
+  position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--edge) 55%, transparent);
+}
+.about-text { display: grid; gap: 22px; min-width: 0; }
+.about-text .big { font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.35; max-width: 32ch; }
+.about-text p { max-width: 62ch; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; margin-top: 14px; }
+.facts h3 { font: 700 1.35rem/1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+.facts dl, .facts ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.facts .row { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 12px; font-size: .95rem; }
+.facts dt { color: var(--ink-soft); font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding-top: 4px; }
+.facts dd { margin: 0; }
+.facts li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 12px; font-size: .95rem; }
+.facts li .y { font-family: var(--mono); font-size: .8rem; color: var(--pencil); padding-top: 3px; font-variant-numeric: tabular-nums; }
+
+/* ---------- Services: lab order slip ---------- */
+.offer { background: var(--card); }
+.slip {
+  background: var(--paper); position: relative;
+  padding: clamp(22px, 4vw, 44px);
+  border: 1px solid var(--line);
+}
+.slip::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 8px;
+  background: radial-gradient(circle at 6px -2px, var(--card) 5px, transparent 5.5px) 0 0 / 14px 8px repeat-x;
+}
+.slip-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-bottom: 14px; border-bottom: 1.5px solid var(--ink); color: var(--ink-soft); }
+.slip-head b { color: var(--ink); font-weight: 500; }
+.items { list-style: none; margin: 0; padding: 0; }
+.item {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2.4fr);
+  gap: 10px 32px; padding-block: 26px; border-bottom: 1px dashed var(--line); align-items: baseline;
+}
+.item h3 { font: 900 clamp(1.9rem, 3.6vw, 2.8rem)/.95 var(--display); text-transform: uppercase; }
+.item p { color: var(--ink); max-width: 52ch; }
+.item p small { display: block; color: var(--ink-soft); font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; margin-top: 10px; line-height: 1.6; }
+.item .price { font-family: var(--mono); font-size: 1rem; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.item .price span { display: block; font-size: .7rem; color: var(--ink-soft); letter-spacing: .06em; text-transform: uppercase; }
+.slip-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; padding-top: 22px; }
+.slip-foot .hand { font-size: clamp(1.15rem, 2vw, 1.5rem); transform: rotate(-2deg); }
+
+/* ---------- Voices ---------- */
+.quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); }
+.quotes figure { margin: 0; display: grid; gap: 18px; align-content: start; border-top: 1.5px solid var(--ink); padding-top: 18px; }
+.quotes blockquote { margin: 0; font-size: clamp(1.15rem, 1.8vw, 1.35rem); line-height: 1.42; font-style: italic; }
+.quotes blockquote::before { content: "“"; }
+.quotes blockquote::after { content: "”"; }
+.quotes figcaption { color: var(--ink-soft); }
+.quotes figcaption b { color: var(--ink); font-weight: 500; display: block; }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--film); color: #ede4d9; }
+.contact .h2 { color: #ede4d9; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+.contact .side { display: grid; gap: 26px; align-content: start; }
+.contact .side p { color: #b9ada1; max-width: 40ch; }
+.contact .hand { color: #f1bf2f; font-size: clamp(1.3rem, 2.4vw, 1.8rem); transform: rotate(-3deg); display: inline-block; }
+.addr { display: grid; gap: 14px; }
+.addr div { display: grid; gap: 2px; }
+.addr .mono { color: #8a7a63; }
+.copy-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.copy-row code { font-family: var(--mono); font-size: 1rem; user-select: all; }
+.copy-btn {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  background: none; border: 1px solid #5a4f45; color: #ede4d9; padding: 5px 9px; cursor: pointer; border-radius: 2px;
+}
+.copy-btn:hover { border-color: #f1bf2f; color: #f1bf2f; }
+form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 28px; }
+.field { display: grid; gap: 8px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #a89b8f; }
+.field input, .field select, .field textarea {
+  font: 400 1.05rem/1.4 var(--body); color: #ede4d9;
+  background: transparent; border: 0; border-bottom: 1.5px solid #4a403a; border-radius: 0;
+  padding: 8px 0; width: 100%; min-width: 0;
+}
+.field select { appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, #a89b8f 50%), linear-gradient(-45deg, transparent 50%, #a89b8f 50%);
+  background-position: calc(100% - 12px) 55%, calc(100% - 6px) 55%; background-size: 6px 6px; background-repeat: no-repeat;
+}
+.field select option { color: #161615; background: #ede4d9; }
+.field textarea { resize: vertical; min-height: 110px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: #f1bf2f; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: none; }
+.field .err { color: #ff8a6b; font-size: .85rem; min-height: 0; }
+.field.invalid input, .field.invalid textarea { border-bottom-color: #ff8a6b; }
+.form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.contact .btn { border-color: #ede4d9; color: #ede4d9; }
+.contact .btn.solid { background: #ede4d9; color: #121211; }
+.contact .btn:hover { background: #f1bf2f; border-color: #f1bf2f; color: #121211; }
+.form-foot small { color: #8a7a63; font-size: .85rem; max-width: 42ch; }
+.sent {
+  grid-column: 1 / -1; border: 1.5px dashed #f1bf2f; padding: 22px; display: grid; gap: 8px;
+}
+.sent strong { font: 900 2rem/1 var(--display); text-transform: uppercase; color: #f1bf2f; }
+.sent p { color: #cfc3b6; }
+
+/* ---------- Footer ---------- */
+footer { background: var(--film); color: #8a7a63; border-top: 1px solid #2a2320; }
+footer .wrap { padding-block: 28px 36px; display: grid; gap: 14px; }
+footer .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+footer p { font-size: .82rem; line-height: 1.6; max-width: 110ch; }
+footer a { color: #cbbf9f; }
+
+/* ---------- Loupe (lightbox) ---------- */
+dialog.loupe {
+  border: 0; padding: 0; background: transparent; color: #ede4d9;
+  width: min(1100px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px);
+  overflow: visible;
+}
+dialog.loupe::backdrop { background: #080605; }
+.loupe-inner { display: grid; gap: 14px; }
+.loupe-img { position: relative; background: #050404; aspect-ratio: 1200 / 844; max-height: calc(100dvh - 250px); min-height: 180px; }
+.loupe-img img { position: absolute; top: 22px; left: 14px; width: calc(100% - 28px); height: calc(100% - 44px); object-fit: contain; filter: grayscale(1) contrast(1.08); transition: filter .5s; }
+.loupe.color .loupe-img img { filter: none; }
+.loupe-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px 24px; }
+.loupe-meta h3 { font: 900 clamp(1.8rem, 4vw, 2.8rem)/.95 var(--display); text-transform: uppercase; }
+.loupe-meta .mono { color: #a89b8f; margin-top: 6px; display: block; }
+.loupe-ctrl { display: flex; gap: 8px; flex-wrap: wrap; }
+.loupe-ctrl button {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
+  background: none; color: #ede4d9; border: 1px solid #5a4f45; padding: 9px 12px; cursor: pointer; border-radius: 2px;
+}
+.loupe-ctrl button:hover { border-color: #f1bf2f; color: #f1bf2f; }
+.loupe-ctrl button[aria-pressed="true"] { background: #f1bf2f; color: #121211; border-color: #f1bf2f; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .bar nav { display: none; }
+  .bar-cta { display: inline-flex; }
+  .hero-grid, .sec-head, .about-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .print .note { top: -44px; right: 0; }
+  .sheet { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .quotes { grid-template-columns: minmax(0, 1fr); }
+  .polaroid { max-width: 380px; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; }
+  .item p { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 600px) {
+  .bar .wrap { gap: 12px; }
+  .hero h1 { font-size: 23vw; }
+  .hero h1 .l2 { padding-left: .3em; }
+  .sheet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  form { grid-template-columns: minmax(0, 1fr); }
+  .print .frame-film { transform: rotate(-.8deg); }
+  .print .note { position: static; transform: rotate(-2deg); text-align: left; margin-bottom: 10px; }
+  .fr { padding: 20px 6px 30px; }
+  .fr .num { bottom: 16px; left: 7px; right: 7px; font-size: .56rem; }
+  .fr .num i { display: none; }
+  .loupe-img { max-height: calc(100dvh - 330px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .strip .run { animation: none; }
+  .hero .ring { animation: none; }
+  .fr img, .loupe-img img { transition: none; }
+}
+</style>
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ring" viewBox="0 0 200 140" preserveAspectRatio="none">
+      <path vector-effect="non-scaling-stroke" d="M22 76 C16 34 72 10 114 12 C166 14 192 42 188 76 C184 114 128 132 86 129 C38 126 8 102 15 68 C18 52 30 38 48 29"/>
+    </symbol>
+    <symbol id="cross" viewBox="0 0 200 140" preserveAspectRatio="none">
+      <path vector-effect="non-scaling-stroke" d="M24 18 C70 52 120 92 178 124"/>
+      <path vector-effect="non-scaling-stroke" d="M176 16 C128 50 76 92 20 126"/>
+    </symbol>
+    <symbol id="strike" viewBox="0 0 400 40" preserveAspectRatio="none">
+      <path vector-effect="non-scaling-stroke" d="M4 26 C90 14 210 22 300 16 C340 14 370 18 396 12"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Jonas Halberg, back to top">J<span>.</span>H<span>.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#work">Work</a>
+      <a href="#creed">Creed</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#voices">Voices</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="bar-cta" href="#contact">Book a shoot</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===== Hero ===== -->
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow mono"><span>Photographer</span><span>Hamburg-Ottensen</span><span>53°33′ N · 9°55′ E</span><span>Black &amp; white since 2009</span></p>
+      <h1>Jonas <span class="l2">Halberg</span></h1>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="lead">I photograph the moment <em>after</em>. When the smile is already gone and the truth hasn’t left yet.</p>
+          <div class="ctas">
+            <a class="btn solid" href="#work">See the contact sheet ↓</a>
+            <a class="btn" href="#contact">Book a shoot</a>
+          </div>
+        </div>
+        <figure class="print" style="margin:0">
+          <p class="note hand" aria-hidden="true">Frame 1A.<br>This is where it started.</p>
+          <div class="frame-film sprockets">
+            <img src="img/p203.jpg" width="1200" height="800" alt="A man stands by the water next to his bicycle as the sun rises behind the hills.">
+            <div class="edge"><span>▸ 1A</span><span>HALBERG 400</span><span>▸ 2</span></div>
+          </div>
+          <svg class="ring" aria-hidden="true"><use href="#ring"/></svg>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" aria-hidden="true">
+    <div class="run">
+      <span>HALBERG 400 ▸ 7 ▸ 7A ▸ 8 ▸ 8A</span><span>SAFETY FILM ▸ 9 ▸ 9A ▸ 10</span><span><b>DO NOT EXPOSE</b> ▸ 11 ▸ 11A</span><span>HALBERG 400 ▸ 12 ▸ 12A ▸ 13</span><span>RODINAL 1+50 ▸ 14 ▸ 14A</span><span>20 °C ▸ 15 ▸ 15A ▸ 16</span>
+      <span>HALBERG 400 ▸ 7 ▸ 7A ▸ 8 ▸ 8A</span><span>SAFETY FILM ▸ 9 ▸ 9A ▸ 10</span><span><b>DO NOT EXPOSE</b> ▸ 11 ▸ 11A</span><span>HALBERG 400 ▸ 12 ▸ 12A ▸ 13</span><span>RODINAL 1+50 ▸ 14 ▸ 14A</span><span>20 °C ▸ 15 ▸ 15A ▸ 16</span>
+    </div>
+  </div>
+
+  <!-- ===== Work ===== -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker mono">Contact sheet no. 214</span>
+          <h2>Sixteen out of thirty-six.</h2>
+        </div>
+        <p>A roll of film has 36 frames. Most of them are honest, a few are good. I circled the good ones with a grease pencil. Hover over a frame or open the loupe. Colour only on request.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter photos">
+        <span class="label mono">Series</span>
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All<sup>16</sup></button>
+        <button class="chip" type="button" data-f="city" aria-pressed="false">City<sup>5</sup></button>
+        <button class="chip" type="button" data-f="people" aria-pressed="false">People<sup>4</sup></button>
+        <button class="chip" type="button" data-f="coast" aria-pressed="false">Coast<sup>4</sup></button>
+        <button class="chip" type="button" data-f="stillness" aria-pressed="false">Stillness<sup>3</sup></button>
+      </div>
+
+      <div class="sheet" id="sheet">
+        <button class="fr" type="button" data-cat="city" data-title="Crosswalk, Tuesday" data-meta="Lisbon · 2023 · f/8 · 1/250 s · HP5 @ 400" data-note="He didn’t wait. Neither did I.">
+          <img src="img/p22.jpg" width="1200" height="800" loading="lazy" alt="A man in a coat crosses an empty street with painted road markings.">
+          <span class="num"><span>▸ 7</span><i>HALBERG 400</i><span>7A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="city" data-title="The street that faces west" data-meta="Porto · 2022 · f/5.6 · 1/125 s · HP5 @ 400" data-note="At 7:10 pm the light falls into this street exactly once.">
+          <img src="img/p57.jpg" width="1200" height="800" loading="lazy" alt="A narrow street between tall brick buildings, a strip of sky at the end.">
+          <span class="num"><span>▸ 8</span><i>HALBERG 400</i><span>8A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="people" data-title="Café, just before closing" data-meta="Copenhagen · 2024 · f/2 · 1/60 s · HP5 @ 1600" data-note="Six people, one window, nobody talking.">
+          <img src="img/p192.jpg" width="1200" height="800" loading="lazy" alt="Silhouettes of guests in front of a large window front in a café.">
+          <span class="num"><span>▸ 9</span><i>HALBERG 400</i><span>9A</span></span>
+          <svg class="ring" aria-hidden="true"><use href="#ring"/></svg>
+          <span class="tag tr hand" aria-hidden="true">this one!</span>
+        </button>
+        <button class="fr" type="button" data-cat="city" data-title="Bridge, 11:41 pm" data-meta="New York · 2019 · f/11 · 8 s · tripod · HP5 @ 400" data-note="Eight seconds of exposure. Seven of them spent in doubt.">
+          <img src="img/p43.jpg" width="1200" height="800" loading="lazy" alt="A suspension bridge at night with the lit skyline behind it.">
+          <span class="num"><span>▸ 10</span><i>HALBERG 400</i><span>10A</span></span>
+        </button>
+
+        <button class="fr" type="button" data-cat="people" data-title="Lotte wears the sun" data-meta="Wendland · 2024 · f/2.8 · 1/500 s · HP5 @ 400" data-note="She asked if she should smile. I said no.">
+          <img src="img/p64.jpg" width="1200" height="800" loading="lazy" alt="A young woman with sunglasses and a flower necklace stands in a field.">
+          <span class="num"><span>▸ 11</span><i>HALBERG 400</i><span>11A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="people" data-title="Backlight, August" data-meta="Brandenburg · 2023 · f/2 · 1/1000 s · HP5 @ 400" data-note="Too pretty. Kept it anyway. Sometimes I’m allowed to lose.">
+          <img src="img/p65.jpg" width="1200" height="800" loading="lazy" alt="A woman seen from behind, her hair glowing in the low evening sun.">
+          <span class="num"><span>▸ 12</span><i>HALBERG 400</i><span>12A</span></span>
+          <svg class="cross" aria-hidden="true"><use href="#cross"/></svg>
+          <span class="tag bl hand" aria-hidden="true">too pretty.</span>
+        </button>
+        <button class="fr" type="button" data-cat="city" data-title="Stairs into white" data-meta="Lisbon · 2023 · f/4 · 1/30 s · HP5 @ 800" data-note="There was nothing up there. That’s exactly why I stayed down here.">
+          <img src="img/p276.jpg" width="1200" height="800" loading="lazy" alt="A stone staircase leads up between walls into bright, diffuse light.">
+          <span class="num"><span>▸ 13</span><i>HALBERG 400</i><span>13A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="coast" data-title="Pelican, unimpressed" data-meta="Monterey · 2018 · f/8 · 1/500 s · HP5 @ 400" data-note="Twenty minutes of eye contact. He won.">
+          <img src="img/p244.jpg" width="1200" height="800" loading="lazy" alt="A pelican perched on a wooden post at the end of a pier, the sea behind it.">
+          <span class="num"><span>▸ 14</span><i>HALBERG 400</i><span>14A</span></span>
+          <svg class="ring" aria-hidden="true"><use href="#ring"/></svg>
+        </button>
+
+        <button class="fr" type="button" data-cat="coast" data-title="Lighthouse, off duty" data-meta="North Frisia · 2021 · f/11 · 1/250 s · yellow filter" data-note="Decommissioned in 1987. Still shines if you look long enough.">
+          <img src="img/p58.jpg" width="1200" height="800" loading="lazy" alt="A small lighthouse on rocks under a dramatic, cloudy sky.">
+          <span class="num"><span>▸ 15</span><i>HALBERG 400</i><span>15A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="coast" data-title="Pier in February" data-meta="Baltic Sea · 2020 · f/8 · 1/125 s · HP5 @ 400" data-note="Minus four degrees. The camera lasted longer than I did.">
+          <img src="img/p47.jpg" width="1200" height="800" loading="lazy" alt="A long pier on stilts fading into grey winter light over the water.">
+          <span class="num"><span>▸ 16</span><i>HALBERG 400</i><span>16A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="stillness" data-title="The whispering forest" data-meta="Harz · 2022 · f/5.6 · 1/30 s · HP5 @ 800" data-note="Fog is the most honest light there is.">
+          <img src="img/p229.jpg" width="1200" height="800" loading="lazy" alt="A path leads through a dark, foggy pine forest.">
+          <span class="num"><span>▸ 17</span><i>HALBERG 400</i><span>17A</span></span>
+          <svg class="ring" aria-hidden="true"><use href="#ring"/></svg>
+          <span class="tag tr hand" aria-hidden="true">print 50×60</span>
+        </button>
+        <button class="fr" type="button" data-cat="people" data-title="The last hill" data-meta="Dolomites · 2022 · f/8 · 1/500 s · red filter" data-note="My brother. He wanted to turn back. Glad he didn’t.">
+          <img src="img/p177.jpg" width="1200" height="800" loading="lazy" alt="A hiker with a backpack stands on a ridge, looking into a hazy valley.">
+          <span class="num"><span>▸ 18</span><i>HALBERG 400</i><span>18A</span></span>
+        </button>
+
+        <button class="fr" type="button" data-cat="stillness" data-title="Snow, still hesitating" data-meta="Tyrol · 2021 · f/11 · 1/250 s · HP5 @ 400" data-note="The hour before it snows is quieter than the snow itself.">
+          <img src="img/p260.jpg" width="1200" height="800" loading="lazy" alt="Snow-covered fir trees in front of a mountain slope in the fog.">
+          <span class="num"><span>▸ 19</span><i>HALBERG 400</i><span>19A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="coast" data-title="Three ships, no harbour" data-meta="Elbe estuary · 2024 · f/16 · 1/60 s · tripod" data-note="They’ve been waiting at anchor for days. I know the feeling.">
+          <img src="img/p266.jpg" width="1200" height="800" loading="lazy" alt="Three cargo ships as small silhouettes on the horizon over calm water.">
+          <span class="num"><span>▸ 20</span><i>HALBERG 400</i><span>20A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="city" data-title="Two streetlights arguing" data-meta="Prague · 2019 · f/2 · 1/30 s · HP5 @ 3200" data-note="Midnight. They never told me what about.">
+          <img src="img/p232.jpg" width="1200" height="800" loading="lazy" alt="Two streetlights glowing at night, snowflakes drifting in their light.">
+          <span class="num"><span>▸ 21</span><i>HALBERG 400</i><span>21A</span></span>
+        </button>
+        <button class="fr" type="button" data-cat="stillness" data-title="Fog with bollard" data-meta="Port of Hamburg · 2025 · f/8 · 1/60 s · HP5 @ 400" data-note="My favourite picture. It shows almost nothing, and that’s enough.">
+          <img src="img/p228.jpg" width="1200" height="800" loading="lazy" alt="A single bollard on a quay wall, everything behind it lost in thick fog.">
+          <span class="num"><span>▸ 22</span><i>HALBERG 400</i><span>22A</span></span>
+          <svg class="ring" aria-hidden="true"><use href="#ring"/></svg>
+          <span class="tag tr hand" aria-hidden="true">!!</span>
+        </button>
+      </div>
+      <div class="sheet-foot mono">
+        <span>Click to open the loupe · arrow keys to browse</span>
+        <span>Fibre prints of every frame on request</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Creed ===== -->
+  <section id="creed" class="manifest" aria-labelledby="creed-h">
+    <div class="wrap">
+      <h2 id="creed-h" class="mono" style="color:var(--pencil);margin-bottom:28px;font-weight:400">What I believe, in five lines</h2>
+      <ol>
+        <li>Light is cheap. <span class="soft">Patience isn’t.</span></li>
+        <li><span class="struck">I take pictures.<svg class="strike" aria-hidden="true"><use href="#strike"/></svg></span><span class="hand">I wait.</span></li>
+        <li>I don’t pose people. <span class="soft">I hold my position.</span></li>
+        <li>A forced smile <span class="soft">is a false one.</span></li>
+        <li>A good picture <span class="soft">explains nothing.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <figure class="polaroid">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="img/p91.jpg" width="1200" height="800" loading="lazy" alt="Jonas Halberg holding a twin-lens medium format camera against his chest.">
+          <figcaption class="hand">Me, with the Rolleiflex. 2024.</figcaption>
+        </figure>
+        <div class="about-text">
+          <span class="mono" style="color:var(--pencil)">About me, briefly</span>
+          <h2 class="h2">Born with wind in my face.</h2>
+          <p class="big">Kiel, 1984. Trained as a darkroom technician, then ten years at a local paper: village fairs, council meetings, a moose on the B 76.</p>
+          <p>That’s where I learned that every picture has a story if you stand still long enough. Today I work out of a backyard studio in Ottensen, with two cameras, one darkroom and no hurry. I shoot for magazines, for people who don’t like being photographed, and for companies that don’t want to look like an ad.</p>
+          <p>I deliver digital files too. But every picture starts on film. It slows me down, and that’s the point.</p>
+          <div class="facts">
+            <div>
+              <h3>Tools</h3>
+              <dl>
+                <div class="row"><dt>Cameras</dt><dd>Leica M6, Rolleiflex 2.8 F</dd></div>
+                <div class="row"><dt>Film</dt><dd>Ilford HP5 Plus, often pushed to 1600</dd></div>
+                <div class="row"><dt>Developer</dt><dd>Rodinal 1+50, 20 °C, 11 minutes</dd></div>
+                <div class="row"><dt>Darkroom</dt><dd>My own. 9 m², red light, one radio.</dd></div>
+              </dl>
+            </div>
+            <div>
+              <h3>Exhibitions</h3>
+              <ul>
+                <li><span class="y">2025</span><span>“What Remains”, Galerie Kranhaus, Hamburg</span></li>
+                <li><span class="y">2023</span><span>“Northern Light, Second-Hand”, Kunstverein Flensburg</span></li>
+                <li><span class="y">2021</span><span>“Tuesdays”, Lübeck Photo Weeks</span></li>
+                <li><span class="y">2019</span><span>Young Photography North Award</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services" class="offer">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker mono">Services</span>
+          <h2>What I’ll expose for you.</h2>
+        </div>
+        <p>No gold, silver and bronze packages. You tell me what you need. I tell you what it costs. All prices include development, scans and VAT.</p>
+      </div>
+
+      <div class="slip">
+        <div class="slip-head mono">
+          <span>Lab order · <b>Studio Halberg</b></span>
+          <span>Valid from <b>1 Jan 2026</b></span>
+        </div>
+        <ul class="items">
+          <li class="item">
+            <h3>Portrait</h3>
+            <p>One hour. One roll. No smiling on command. For people who rarely like themselves in photos.<small>12 digital images · 1 fibre print 30 × 40 cm</small></p>
+            <div class="price">from €380<span>per session</span></div>
+          </li>
+          <li class="item">
+            <h3>Reportage</h3>
+            <p>Weddings, anniversaries, farewells, moving day. I’m there all day and somehow not at all.<small>8 hrs on site · 150 to 300 images · print box</small></p>
+            <div class="price">from €1,400<span>per day</span></div>
+          </li>
+          <li class="item">
+            <h3>Editorial &amp; brand</h3>
+            <p>For magazines and brands with a story. People at work, spaces, hands, tools.<small>Usage rights by arrangement</small></p>
+            <div class="price">on request<span>depends on scope</span></div>
+          </li>
+          <li class="item">
+            <h3>Darkroom</h3>
+            <p>Saturday workshop. Four people, one red light. You go home with your own print and smelling of fixer.<small>10 am to 4 pm · materials and coffee included</small></p>
+            <div class="price">€190<span>per person</span></div>
+          </li>
+        </ul>
+        <div class="slip-foot">
+          <span class="hand">Spring 2027 dates are still open.</span>
+          <a class="btn solid" href="#contact">Request a date</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Voices ===== -->
+  <section id="voices">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker mono">Voices</span>
+          <h2>What others say.</h2>
+        </div>
+        <p>I quote them because they say it better. And because self-praise looks bad on fibre paper.</p>
+      </div>
+      <div class="quotes">
+        <figure>
+          <blockquote>Halberg shoots as if he had all the time in the world. He simply took it.</blockquote>
+          <figcaption class="mono"><b>Halftone Magazine</b>Issue 3/2025</figcaption>
+        </figure>
+        <figure>
+          <blockquote>Not a single posed picture in our wedding album. My mother still cries at every page.</blockquote>
+          <figcaption class="mono"><b>Merle &amp; Tobias</b>Wedding, June 2024</figcaption>
+        </figure>
+        <figure>
+          <blockquote>He came, he waited, he left. Three weeks later we had the best portraits our team ever had.</blockquote>
+          <figcaption class="mono"><b>Kaja Brandt</b>Nordwind Workshop</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="side">
+          <span class="mono" style="color:#f1bf2f">Contact</span>
+          <h2 class="h2">Write to me.</h2>
+          <span class="hand">I reply once the light is gone.</span>
+          <p>So usually in the evening, within two days at the latest. Tell me what you have in mind. One sentence is enough to start.</p>
+          <div class="addr">
+            <div><span class="mono">Email</span>
+              <span class="copy-row"><code id="mail">studio@halberg.example</code><button class="copy-btn" type="button" id="copyMail">Copy</button></span>
+            </div>
+            <div><span class="mono">Studio</span><span>Backyard, Ottensen, 22765 Hamburg, Germany<br>By appointment only. Ring the bell marked “Lab”.</span></div>
+          </div>
+        </div>
+
+        <form id="form" novalidate>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <span class="err" id="e-name" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-mail">Email</label>
+            <input id="f-mail" name="email" type="email" autocomplete="email" required>
+            <span class="err" id="e-mail" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-type">What’s it about?</label>
+            <select id="f-type" name="type">
+              <option>Portrait</option>
+              <option>Reportage</option>
+              <option>Editorial &amp; brand</option>
+              <option>Darkroom workshop</option>
+              <option>Something else entirely</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date">Preferred date (optional)</label>
+            <input id="f-date" name="date" type="date">
+          </div>
+          <div class="field full">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" rows="4" required placeholder="What should end up on film?"></textarea>
+            <span class="err" id="e-msg" aria-live="polite"></span>
+          </div>
+          <div class="form-foot">
+            <button class="btn solid" type="submit">Send request</button>
+            <small>Demo site: Jonas Halberg is fictional, nothing gets sent.</small>
+          </div>
+          <div class="sent" id="sent" hidden role="status">
+            <strong>Noted.</strong>
+            <p id="sentText"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="top mono">
+      <span>© 2026 Jonas Halberg · Hamburg</span>
+      <span>Developed in Rodinal, not in the cloud.</span>
+    </div>
+    <p>Jonas Halberg and all names, quotes and exhibitions on this page are fictional. The photos are stock images from Unsplash, provided via Lorem Picsum. Photographed by Diogo Tavares, Alejandro Escamilla, Nicholas Swanson, Adam Przewoski, Christopher Sardegna, Alexander Shustov, davide ragusa, Yair Hazout, Tony Naccarato, Orlova Maria, Danka &amp; Peter, Sylwia Bartyzel, John Maravelakis, Hide Obara, Michal Kubicek and Jennifer Trovato. Thank you all.</p>
+  </div>
+</footer>
+
+<dialog class="loupe" id="loupe" aria-labelledby="loupeTitle">
+  <div class="loupe-inner">
+    <div class="loupe-img sprockets">
+      <img id="loupeImg" src="img/p22.jpg" alt="">
+    </div>
+    <div class="loupe-meta">
+      <div>
+        <span class="mono" id="loupeNo" style="color:#f1bf2f;margin:0 0 6px">Frame 7</span>
+        <h3 id="loupeTitle">Title</h3>
+        <span class="mono" id="loupeMeta"></span>
+        <p class="hand" id="loupeNote" style="color:#f1bf2f;margin-top:12px;font-size:1.25rem;max-width:44ch"></p>
+      </div>
+      <div class="loupe-ctrl">
+        <button type="button" id="lbColor" aria-pressed="false">Show colour</button>
+        <button type="button" id="lbPrev" aria-label="Previous photo">← Back</button>
+        <button type="button" id="lbNext" aria-label="Next photo">Next →</button>
+        <button type="button" id="lbClose">Close ✕</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+  document.documentElement.lang = "en";
+
+  /* Filter */
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  var frames = Array.prototype.slice.call(document.querySelectorAll(".fr"));
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.getAttribute("data-f");
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      frames.forEach(function (fr) { fr.hidden = !(f === "all" || fr.getAttribute("data-cat") === f); });
+    });
+  });
+
+  /* Loupe */
+  var loupe = document.getElementById("loupe");
+  var lImg = document.getElementById("loupeImg");
+  var lNo = document.getElementById("loupeNo");
+  var lTitle = document.getElementById("loupeTitle");
+  var lMeta = document.getElementById("loupeMeta");
+  var lNote = document.getElementById("loupeNote");
+  var lColor = document.getElementById("lbColor");
+  var current = 0;
+
+  function visibleFrames() { return frames.filter(function (fr) { return !fr.hidden; }); }
+  function show(fr) {
+    var img = fr.querySelector("img");
+    var num = fr.querySelector(".num span").textContent.replace("▸", "").trim();
+    lImg.src = img.getAttribute("src");
+    lImg.alt = img.alt;
+    lNo.textContent = "Frame " + num;
+    lTitle.textContent = fr.getAttribute("data-title");
+    lMeta.textContent = fr.getAttribute("data-meta");
+    lNote.textContent = fr.getAttribute("data-note");
+  }
+  function open(fr) {
+    current = visibleFrames().indexOf(fr);
+    show(fr);
+    if (typeof loupe.showModal === "function") { loupe.showModal(); } else { loupe.setAttribute("open", ""); }
+  }
+  function step(d) {
+    var vis = visibleFrames();
+    if (!vis.length) return;
+    current = (current + d + vis.length) % vis.length;
+    show(vis[current]);
+  }
+  function close() {
+    if (typeof loupe.close === "function") { loupe.close(); } else { loupe.removeAttribute("open"); }
+  }
+  frames.forEach(function (fr) { fr.addEventListener("click", function () { open(fr); }); });
+  document.getElementById("lbPrev").addEventListener("click", function () { step(-1); });
+  document.getElementById("lbNext").addEventListener("click", function () { step(1); });
+  document.getElementById("lbClose").addEventListener("click", close);
+  lColor.addEventListener("click", function () {
+    var on = loupe.classList.toggle("color");
+    lColor.setAttribute("aria-pressed", on ? "true" : "false");
+    lColor.textContent = on ? "Black & white" : "Show colour";
+  });
+  loupe.addEventListener("click", function (e) { if (e.target === loupe) close(); });
+  loupe.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+  });
+
+  /* Copy email */
+  var copyBtn = document.getElementById("copyMail");
+  var mail = document.getElementById("mail");
+  copyBtn.addEventListener("click", function () {
+    var text = mail.textContent;
+    function selectFallback() {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copyBtn.textContent = "Selected";
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { copyBtn.textContent = "Copied"; }, selectFallback);
+    } catch (err) { selectFallback(); }
+    setTimeout(function () { copyBtn.textContent = "Copy"; }, 2200);
+  });
+
+  /* Form: validates input but sends nothing */
+  var form = document.getElementById("form");
+  var sent = document.getElementById("sent");
+  function setErr(field, id, msg) {
+    document.getElementById(id).textContent = msg;
+    field.closest(".field").classList.toggle("invalid", !!msg);
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("f-name");
+    var em = document.getElementById("f-mail");
+    var msg = document.getElementById("f-msg");
+    var ok = true;
+    if (!name.value.trim()) { setErr(name, "e-name", "What should I call you?"); ok = false; } else setErr(name, "e-name", "");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) { setErr(em, "e-mail", "Please enter an email address with an @ and a domain."); ok = false; } else setErr(em, "e-mail", "");
+    if (msg.value.trim().length < 5) { setErr(msg, "e-msg", "One sentence is enough, but it has to be one."); ok = false; } else setErr(msg, "e-msg", "");
+    if (!ok) { form.querySelector(".invalid input, .invalid textarea").focus(); return; }
+    var type = document.getElementById("f-type").value;
+    document.getElementById("sentText").textContent =
+      "Thanks, " + name.value.trim() + ". Your " + type.toLowerCase() + " request would now be on its way to the darkroom. This site is a mock-up with a fictional photographer, so nothing was sent.";
+    sent.hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
